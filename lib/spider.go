@@ -6,7 +6,7 @@ type Spider struct {
 	refer string
 }
 
-//use http get methode get content
+//use http get methode get content ok
 func (s *Spider) Fetch(url string) (content string) {
 
 	if url == "http://www.atido.com" {
