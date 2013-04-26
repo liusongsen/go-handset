@@ -3,12 +3,51 @@
 */
 package handset
 
-//偶数判断
-func Even(i int) bool {
-	return i%2 == 0
+import (
+	"fmt"
+)
+
+var c chan int
+var i int
+var sims map[string]sim
+
+//采集手机号码段信息
+func collector(p phoner) {
+
+	var url string
+	var sim sim
+
+	url = p.makeUrl()
+	sim = p.parse()
+	sims[p.getKey()] = sim
+	fmt.Printf("%s======%v\n", url, sim)
+	c <- 1
+
 }
 
-//奇数判断
-func odd(i int) bool {
-	return i%2 == 1
+//解析手机号码
+func Parse(mobileno int) {
+
+	c = make(chan int)
+	sims = make(map[string]sim)
+
+	pIp138 := ip138{mobileno, ""}
+	pImobile := imobile{mobileno, ""}
+	pShouji := shouji{mobileno, ""}
+
+	go collector(pIp138)
+	go collector(pImobile)
+	go collector(pShouji)
+
+L:
+	for {
+		select {
+		case <-c:
+			i++
+			if i > 0 {
+				break L
+			}
+		}
+	}
+
 }

@@ -1,9 +1,9 @@
 package lib
 
 type Spider struct {
-	host  string
-	port  int
-	refer string
+	HOST  string
+	PORT  int
+	REFER string
 }
 
 //use http get methode get content

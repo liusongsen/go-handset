@@ -13,4 +13,5 @@ func main() {
 	result := handset.Even(3)
 	fmt.Printf("%v\n", result)
 	fmt.Printf("%v\n", s.Fetch("http://www.atido.com"))
+
 }
