@@ -34,7 +34,7 @@ type imobile struct {
 //构造请求URL
 func (h imobile) makeUrl() string {
 
-	h.url = createImobileUrl(h.card)
+	h.url = createImobileUrl(h.card).String()
 	return h.url
 }
 
@@ -61,7 +61,7 @@ type ip138 struct {
 //构造请求URL
 func (h ip138) makeUrl() string {
 
-	h.url = createIp138Url(h.card)
+	h.url = createIp138Url(h.card).String()
 	return h.url
 }
 
@@ -88,7 +88,7 @@ type shouji struct {
 //构造请求URL
 func (h shouji) makeUrl() string {
 
-	h.url = createShowjiUrl(h.card)
+	h.url = createShowjiUrl(h.card).String()
 	return h.url
 }
 
