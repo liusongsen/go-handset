@@ -28,6 +28,10 @@ func collector(p phoner) {
 //解析手机号码
 func Parse(mobileno int) {
 
+	defer func() {
+		fmt.Printf("%v\n", sims)
+	}()
+
 	c = make(chan int)
 	sims = make(map[string]sim)
 
