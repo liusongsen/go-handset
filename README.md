@@ -28,10 +28,13 @@ handset.Parse(1320201)
 
 
 example:
+
 	go build handset.go
+
 	./handset
 
 test:
+
 	go test 
 
 [ `go test` | done: 1.21986s ]
