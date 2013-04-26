@@ -4,12 +4,6 @@ import (
 	"strconv"
 )
 
-const (
-	IMOBILE = "http://www.imobile.com.cn/"
-	IP138   = "http://www.ip138.com/"
-	SHOJI   = "http://www.showji.com/"
-)
-
 //sim信息元数据
 type sim struct {
 	province string "省份"
