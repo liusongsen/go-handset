@@ -7,8 +7,7 @@ import (
 
 func TestFetch(t *testing.T) {
 
-	spider := Spider{"127.0.0.1", 23456, "http://www.baidu.com"}
-
+	spider := new(Spider)
 	body, err := spider.Fetch("http://www.atido.com")
 
 	if err != nil {
@@ -19,7 +18,7 @@ func TestFetch(t *testing.T) {
 
 func TestSubmit(t *testing.T) {
 
-	spider := Spider{"127.0.0.1", 23456, "http://www.baidu.com"}
+	spider := new(Spider)
 
 	v := url.Values{}
 	v.Set("username", "pickerliu")

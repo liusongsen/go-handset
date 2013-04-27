@@ -12,13 +12,17 @@ var i int
 var sims map[string]sim
 
 //采集手机号码段信息
-func collector(p phoner) {
+func collector(p phone, t string) {
 
-	if t, ok := p.(phoner); ok {
-
-		sim := p.parse()
-		sims[fmt.Sprintf("%T", t)] = sim
+	switch t {
+	case "ip138":
+		sims[t] = p.parseIp138()
+	case "imobile":
+		sims[t] = p.parseImobile()
+	case "shouji":
+		sims[t] = p.parseShouji()
 	}
+
 	c <- 1
 
 }
@@ -33,13 +37,11 @@ func Parse(mobileno int) {
 	c = make(chan int)
 	sims = make(map[string]sim)
 
-	pIp138 := ip138{mobileno, createIp138Url(mobileno).String()}
-	pImobile := imobile{mobileno, createImobileUrl(mobileno).String()}
-	pShouji := shouji{mobileno, createShowjiUrl(mobileno).String()}
+	p := phone{mobileno}
 
-	go collector(pIp138)
-	go collector(pImobile)
-	go collector(pShouji)
+	go collector(p, "ip138")
+	go collector(p, "imobile")
+	go collector(p, "shouji")
 
 L:
 	for {

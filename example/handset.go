@@ -13,7 +13,7 @@ func main() {
 	handset.Parse(1320201)
 	fmt.Printf("=========%v:%d==========\n", "End", time.Now().Unix())
 
-	spider := lib.Spider{"127.0.0.1", 5438, "http://www.baidu.com"}
+	spider := new(lib.Spider)
 	content, _ := spider.Fetch("http://www.baidu.com")
 	fmt.Printf("%v\n", string(content))
 

@@ -19,7 +19,7 @@ type Spider struct {
 }
 
 //use http get methode get content
-func (s Spider) Fetch(url string) ([]byte, error) {
+func (s *Spider) Fetch(url string) ([]byte, error) {
 
 	fmt.Sprintf("%v\n", url)
 	//create client object
@@ -43,7 +43,7 @@ func (s Spider) Fetch(url string) ([]byte, error) {
 }
 
 //use http post method  sumit  data 
-func (s Spider) Submit(url string, values url.Values) ([]byte, error) {
+func (s *Spider) Submit(url string, values url.Values) ([]byte, error) {
 
 	client := http.Client{}
 
