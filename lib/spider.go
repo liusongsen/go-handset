@@ -1,5 +1,16 @@
+/*
+	lib package
+	封装spider模拟curl函数
+*/
 package lib
 
+import (
+	"io/ioutil"
+	"net/http"
+	"net/url"
+)
+
+//爬虫类
 type Spider struct {
 	HOST  string
 	PORT  int
@@ -7,19 +18,39 @@ type Spider struct {
 }
 
 //use http get methode get content
-func (s Spider) Fetch(url string) (content string) {
+func (s Spider) Fetch(url string) ([]byte, error) {
 
-	if url == "http://www.atido.com" {
-		content = "atido.com"
-	} else {
-		content = "atido.nets"
+	//create client object
+	client := &http.Client{}
+	//create resposne object
+	req, err := http.NewRequest("GET", url, nil)
+	if err == nil {
+		//set header
+		//make resposne
+		resp, err := client.Do(req)
+		if err == nil {
+
+			defer resp.Body.Close()
+
+			content, err := ioutil.ReadAll(resp.Body)
+			return content, err
+		}
 	}
-	return
+
+	return []byte(""), err
 }
 
-//模拟表单POST数据
-func (s Spider) Submit(url string) (content string) {
+//use http post method  sumit  data 
+func (s Spider) Submit(url string, values url.Values) ([]byte, error) {
 
-	content = url + "post"
-	return
+	client := http.Client{}
+
+	resp, err := client.PostForm(url, values)
+	defer resp.Body.Close()
+
+	if err == nil {
+		content, err := ioutil.ReadAll(resp.Body)
+		return content, err
+	}
+	return []byte(""), err
 }

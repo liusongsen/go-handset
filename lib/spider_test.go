@@ -1,23 +1,35 @@
 package lib
 
 import (
+	"net/url"
 	"testing"
 )
 
 func TestFetch(t *testing.T) {
 
 	spider := Spider{"127.0.0.1", 23456, "http://www.baidu.com"}
-	if spider.Fetch("http://www.atido.com.cn") == "atido.com" {
-		t.Log("http://www.atido.com")
+
+	body, err := spider.Fetch("http://www.atido.com")
+
+	if err != nil {
+		t.Log(string(body))
 		t.Fail()
 	}
 }
 
 func TestSubmit(t *testing.T) {
 
-	spider := Spider{"127.0.0.1", 23456, "http://www.google.com"}
-	if spider.Submit("http://www.atido.com.cn") == "http://www.atido.com.cn" {
-		t.Log("http://www.atido.com")
+	spider := Spider{"127.0.0.1", 23456, "http://www.baidu.com"}
+
+	v := url.Values{}
+	v.Set("username", "pickerliu")
+	v.Add("password", "sdfsdf")
+	v.Add("imgCode", "3345")
+
+	body, err := spider.Submit("http://u.atido.com/index.php?m=ucenter&c=user&a=userLogin", v)
+
+	if err != nil {
+		t.Log(string(body))
 		t.Fail()
 	}
 }
