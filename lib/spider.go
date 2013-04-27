@@ -5,6 +5,7 @@
 package lib
 
 import (
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"net/url"
@@ -20,6 +21,7 @@ type Spider struct {
 //use http get methode get content
 func (s Spider) Fetch(url string) ([]byte, error) {
 
+	fmt.Sprintf("%v\n", url)
 	//create client object
 	client := &http.Client{}
 	//create resposne object

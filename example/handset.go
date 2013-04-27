@@ -14,6 +14,7 @@ func main() {
 	fmt.Printf("=========%v:%d==========\n", "End", time.Now().Unix())
 
 	spider := lib.Spider{"127.0.0.1", 5438, "http://www.baidu.com"}
-	fmt.Printf("%v\n", spider.Submit("http://www.baidu.com"))
+	content, _ := spider.Fetch("http://www.baidu.com")
+	fmt.Printf("%v\n", string(content))
 
 }
